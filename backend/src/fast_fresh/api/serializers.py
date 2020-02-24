@@ -1,0 +1,148 @@
+from rest_framework import serializers
+from fast_fresh.models import Product, Client, Member, Zona, City, State, Payment, Product_Type, Type_Of_Product, Batch, Store, Delivery, PickUp, Bill, BillDetails, Currency, ExchangeRate, CashRegister, CashRegisterIncome, PaymentMethod, Employee, Job, IVA
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+# Batch Serializer
+class BatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Batch
+        fields = '__all__'
+
+
+# Type_Of_Product Serializer
+class Type_Of_ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Type_Of_Product
+        fields = '__all__'
+
+
+# Product_Type Serializer
+class Product_TypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product_Type
+        fields = '__all__'
+
+
+# Client Serializer
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+
+# Member Serializer
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = '__all__'
+
+
+# Zone Serializer
+class ZonaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Zona
+        fields = '__all__'
+
+
+# City Serializer
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = '__all__'
+
+
+# State Serializer
+class StateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = State
+        fields = '__all__'
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = '__all__'
+
+
+class StoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Store
+        fields = '__all__'
+
+
+class DeliverySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Delivery
+        fields = '__all__'
+
+
+class PickUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PickUp
+        fields = '__all__'
+
+
+class BillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bill
+        fields = '__all__'
+
+
+class BillDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BillDetails
+        fields = '__all__'
+
+
+class CurrencySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Currency
+        fields = '__all__'
+
+
+class ExchangeRateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExchangeRate
+        fields = '__all__'
+
+
+class CashRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CashRegister
+        fields = '__all__'
+
+
+class CashRegisterIncomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CashRegisterIncome
+        fields = '__all__'
+
+
+class PaymentMethodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentMethod
+        fields = '__all__'
+
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employee
+        fields = '__all__'
+
+
+class JobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job
+        fields = '__all__'
+
+
+class IVASerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IVA
+        fields = '__all__'
