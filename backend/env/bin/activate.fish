@@ -57,7 +57,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/Veka/Desktop/Fast_And_Fresh/backend/env"
+set -gx VIRTUAL_ENV "/Users/macbookpro/Desktop/FAST_AND_FRESH2.0/backend/env"
 
 # https://github.com/fish-shell/fish-shell/issues/436 altered PATH handling
 if test (echo $FISH_VERSION | tr "." "\n")[1] -lt 3
