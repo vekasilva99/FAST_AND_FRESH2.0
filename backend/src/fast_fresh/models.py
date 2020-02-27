@@ -111,9 +111,9 @@ class Delivery (models.Model):
     STATUS = ('Entregado', ('Entregado')), ('No Entregado', ('No Entregado'))
     delivery_price = models.FloatField()
     employee = models.ForeignKey(
-        'Employee', on_delete=models.CASCADE, null=False, blank=False, default=None)
+        'Employee', on_delete=models.CASCADE, null=False, blank=False)
     bill_id = models.ForeignKey(
-        'Bill', on_delete=models.CASCADE, null=False, blank=False, default=None)
+        'Bill', on_delete=models.CASCADE, null=False, blank=False)
     delivery_status = models.CharField(
         max_length=15, choices=STATUS, blank=False, null=False)
     zona = models.ForeignKey(
@@ -131,9 +131,9 @@ class PickUp (models.Model):
 
 class Bill (models.Model):
     cash_register_id = models.ForeignKey(
-        'CashRegister', on_delete=models.CASCADE, null=False, blank=False, default=None)
+        'CashRegister', on_delete=models.CASCADE, null=False, blank=False)
     client_id = models.ForeignKey(
-        'Client', on_delete=models.CASCADE, null=False, blank=False, default=None)
+        'Client', on_delete=models.CASCADE, null=False, blank=False)
     bill_sub_total = models.FloatField()
     bill_iva = models.ForeignKey(
         'IVA', on_delete=models.CASCADE, null=False, blank=False, default=None)

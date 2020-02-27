@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView
 from fast_fresh.models import Product, Client, Member, Zona, City, State, Payment, Product_Type, Type_Of_Product, Batch, Store, Delivery, PickUp, Bill, BillDetails, Currency, ExchangeRate, CashRegister, CashRegisterIncome, PaymentMethod, Employee, Job, IVA
 from .serializers import ProductSerializer, ClientSerializer, MemberSerializer, ZonaSerializer, CitySerializer, StateSerializer, PaymentSerializer, Product_TypeSerializer, Type_Of_ProductSerializer, BatchSerializer, StoreSerializer, DeliverySerializer, PickUpSerializer, BillSerializer, BillDetailsSerializer, CurrencySerializer, ExchangeRateSerializer, CashRegisterSerializer, CashRegisterIncomeSerializer, PaymentMethodSerializer, EmployeeSerializer, JobSerializer, IVASerializer
 
@@ -421,4 +421,238 @@ class IVAViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny
     ]
+    serializer_class = IVASerializer
+
+# Create View
+
+
+class ProductCreateView(CreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ClientCreateView(CreateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+
+
+class MemberCreateView(CreateAPIView):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
+
+
+class ZonaCreateView(CreateAPIView):
+    queryset = Zona.objects.all()
+    serializer_class = Zona
+
+
+class CityCreateView(CreateAPIView):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+
+
+class StateCreateView(CreateAPIView):
+    queryset = State.objects.all()
+    serializer_class = StateSerializer
+
+
+class PaymentCreateView(CreateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+
+
+class Product_TypeCreateView(CreateAPIView):
+    queryset = Product_Type.objects.all()
+    serializer_class = Product_TypeSerializer
+
+
+class Type_Of_ProductCreateView(CreateAPIView):
+    queryset = Type_Of_Product.objects.all()
+    serializer_class = Type_Of_ProductSerializer
+
+
+class BatchCreateView(CreateAPIView):
+    queryset = Batch.objects.all()
+    serializer_class = BatchSerializer
+
+
+class StoreCreateView(CreateAPIView):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer
+
+
+class DeliveryCreateView(CreateAPIView):
+    queryset = Delivery.objects.all()
+    serializer_class = DeliverySerializer
+
+
+class BillCreateView(CreateAPIView):
+    queryset = Bill.objects.all()
+    serializer_class = BillSerializer
+
+
+class PickUpCreateView(CreateAPIView):
+    queryset = PickUp.objects.all()
+    serializer_class = PickUpSerializer
+
+
+class BillDetailsCreateView(CreateAPIView):
+    queryset = BillDetails.objects.all()
+    serializer_class = BillDetailsSerializer
+
+
+class CurrencyCreateView(CreateAPIView):
+    queryset = Currency.objects.all()
+    serializer_class = CurrencySerializer
+
+
+class ExchangeRateCreateView(CreateAPIView):
+    queryset = ExchangeRate.objects.all()
+    serializer_class = ExchangeRateSerializer
+
+
+class CashRegisterCreateView(CreateAPIView):
+    queryset = CashRegister.objects.all()
+    serializer_class = CashRegisterSerializer
+
+
+class CashRegisterIncomeCreateView(CreateAPIView):
+    queryset = CashRegisterIncome.objects.all()
+    serializer_class = CashRegisterIncomeSerializer
+
+
+class PaymentMethodCreateView(CreateAPIView):
+    queryset = PaymentMethod.objects.all()
+    serializer_class = PaymentMethodSerializer
+
+
+class EmployeeCreateView(CreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+class JobCreateView(CreateAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class IVACreateView(CreateAPIView):
+    queryset = IVA.objects.all()
+    serializer_class = IVASerializer
+
+# Update View
+
+
+class ProductUpdateView(UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ClientUpdateView(UpdateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+
+
+class MemberUpdateView(UpdateAPIView):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
+
+
+class ZonaUpdateView(UpdateAPIView):
+    queryset = Zona.objects.all()
+    serializer_class = Zona
+
+
+class CityUpdateView(UpdateAPIView):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+
+
+class StateUpdateView(UpdateAPIView):
+    queryset = State.objects.all()
+    serializer_class = StateSerializer
+
+
+class PaymentUpdateView(UpdateAPIView):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+
+
+class Product_TypeUpdateView(UpdateAPIView):
+    queryset = Product_Type.objects.all()
+    serializer_class = Product_TypeSerializer
+
+
+class Type_Of_ProductUpdateView(UpdateAPIView):
+    queryset = Type_Of_Product.objects.all()
+    serializer_class = Type_Of_ProductSerializer
+
+
+class BatchUpdateView(UpdateAPIView):
+    queryset = Batch.objects.all()
+    serializer_class = BatchSerializer
+
+
+class StoreUpdateView(UpdateAPIView):
+    queryset = Store.objects.all()
+    serializer_class = StoreSerializer
+
+
+class DeliveryUpdateView(UpdateAPIView):
+    queryset = Delivery.objects.all()
+    serializer_class = DeliverySerializer
+
+
+class BillUpdateView(UpdateAPIView):
+    queryset = Bill.objects.all()
+    serializer_class = BillSerializer
+
+
+class PickUpUpdateView(UpdateAPIView):
+    queryset = PickUp.objects.all()
+    serializer_class = PickUpSerializer
+
+
+class BillDetailsUpdateView(UpdateAPIView):
+    queryset = BillDetails.objects.all()
+    serializer_class = BillDetailsSerializer
+
+
+class CurrencyUpdateView(UpdateAPIView):
+    queryset = Currency.objects.all()
+    serializer_class = CurrencySerializer
+
+
+class ExchangeRateUpdateView(UpdateAPIView):
+    queryset = ExchangeRate.objects.all()
+    serializer_class = ExchangeRateSerializer
+
+
+class CashRegisterUpdateView(UpdateAPIView):
+    queryset = CashRegister.objects.all()
+    serializer_class = CashRegisterSerializer
+
+
+class CashRegisterIncomeUpdateView(UpdateAPIView):
+    queryset = CashRegisterIncome.objects.all()
+    serializer_class = CashRegisterIncomeSerializer
+
+
+class PaymentMethodUpdateView(UpdateAPIView):
+    queryset = PaymentMethod.objects.all()
+    serializer_class = PaymentMethodSerializer
+
+
+class EmployeeUpdateView(UpdateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+class JobUpdateView(UpdateAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class IVAUpdateView(UpdateAPIView):
+    queryset = IVA.objects.all()
     serializer_class = IVASerializer
