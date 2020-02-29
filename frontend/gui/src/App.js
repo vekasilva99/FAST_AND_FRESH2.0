@@ -5,7 +5,6 @@ import "antd/dist/antd.css";
 import BaseRouter from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import CustomLayout from "./containers/Layout";
-import ProductList from "./containers/ProductListView";
 
 class App extends Component {
   render() {

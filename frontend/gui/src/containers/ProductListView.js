@@ -1,6 +1,7 @@
 import React from "react";
 import Products from "../components/Product";
 import axios from "axios";
+import CustomProductForm from "../components/ProductForm";
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -28,7 +29,14 @@ class ProductList extends React.Component {
     });
   }
   render() {
-    return <Products data={this.state.products} />;
+    return (
+      <div>
+        <Products data={this.state.products} />
+        <br />
+        <h2>Crear Producto</h2>
+        <CustomProductForm requestType="post" productId={null} btnText="Add" />
+      </div>
+    );
   }
 }
 

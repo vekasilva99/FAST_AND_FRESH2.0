@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from fast_fresh.models import Product, Client, Member, Zona, City, State, Payment, Product_Type, Type_Of_Product, Batch, Store, Delivery, PickUp, Bill, BillDetails, Currency, ExchangeRate, CashRegister, CashRegisterIncome, PaymentMethod, Employee, Job, IVA
+from fast_fresh.models import Product, Provider, ProviderPhone, EmployeeStore, StoreBoss, Client, Member, Zona, City, State, Payment, Product_Type, Type_Of_Product, Batch, Store, Delivery, PickUp, Bill, BillDetails, Currency, ExchangeRate, CashRegister, CashRegisterBills, PaymentMethod, Employee, Job, IVA
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -76,6 +76,12 @@ class StoreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class StoreBossSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StoreBoss
+        fields = '__all__'
+
+
 class DeliverySerializer(serializers.ModelSerializer):
     class Meta:
         model = Delivery
@@ -118,9 +124,9 @@ class CashRegisterSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CashRegisterIncomeSerializer(serializers.ModelSerializer):
+class CashRegisterBillsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CashRegisterIncome
+        model = CashRegisterBills
         fields = '__all__'
 
 
@@ -136,9 +142,27 @@ class EmployeeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class EmployeeStoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmployeeStore
+        fields = '__all__'
+
+
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
+        fields = '__all__'
+
+
+class ProviderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Provider
+        fields = '__all__'
+
+
+class ProviderPhoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProviderPhone
         fields = '__all__'
 
 

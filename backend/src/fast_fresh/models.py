@@ -5,6 +5,8 @@ class Product (models.Model):
     product_name = models.CharField(max_length=30, null=True)
     is_special = models.BooleanField()
     is_active = models.BooleanField()
+    provider = models.ForeignKey(
+        'Provider', on_delete=models.CASCADE, null=False, blank=False)
 
     def __str__(self):
         return self.product_name
@@ -19,6 +21,8 @@ class Batch (models.Model):
     price_dolars_u = models.FloatField()
     units_sold = models.IntegerField(default=0)
     units_lost = models.IntegerField(default=0)
+    discount = models.FloatField(default=0)
+    price_points = models.IntegerField(default=0)
     store = models.ForeignKey(
         'Store', on_delete=models.CASCADE, null=False, blank=False)
 
@@ -42,11 +46,12 @@ class Client (models.Model):
     GENDER = ('F', ('Femenine')), ('M', ('Masculine'))
     client_name = models.CharField(max_length=100)
     client_last_name = models.CharField(max_length=100)
-    client_cedula = models.IntegerField(null=True)
+    client_cedula = models.IntegerField(null=True, unique=True)
     client_phone = models.IntegerField(null=True)
     client_gender = models.CharField(
         max_length=1, choices=GENDER, blank=False, null=False)
-    client_birthday = models.DateField()
+    zona = models.ForeignKey(
+        'Zona', on_delete=models.CASCADE, null=False, blank=False)
 
     def __str__(self):
         return self.client_name
@@ -57,18 +62,18 @@ class Member (models.Model):
     member_points = models.IntegerField(default=0)
     member_email = models.EmailField()
     member_start_date = models.DateField(auto_now_add=True)
-    member_end_date = models.DateField()
-    zona = models.ForeignKey(
-        'Zona', on_delete=models.CASCADE, null=False, blank=False)
+    member_pay_date = models.DateField()
     client = models.OneToOneField(
         'Client', on_delete=models.CASCADE, null=False, blank=False)
     is_active = models.BooleanField()
+    member_birth_date = models.DateField()
 
 
 class Zona (models.Model):
     zona_name = models.CharField(max_length=30)
     city = models.ForeignKey(
         'City', on_delete=models.CASCADE, null=False, blank=False)
+    is_active = models.BooleanField()
 
     def __str__(self):
         return self.zona_name
@@ -99,12 +104,19 @@ class Store (models.Model):
     open_time = models.TimeField()
     closing_time = models.TimeField()
     store_phone = models.IntegerField(unique=True)
-    # supervisor = models.OneToOneField(
-    #     'Employee', on_delete=models.CASCADE, null=False, blank=False)
     is_active = models.BooleanField()
 
     def __str__(self):
         return self.store_name
+
+
+class StoreBoss(models.Model):
+    store = models.OneToOneField(
+        'Store', on_delete=models.CASCADE, null=False, blank=False)
+    boss = models.OneToOneField(
+        'Employee', on_delete=models.CASCADE, null=False, blank=False)
+    start_date = models.DateField()
+    is_active = models.BooleanField()
 
 
 class Delivery (models.Model):
@@ -130,8 +142,6 @@ class PickUp (models.Model):
 
 
 class Bill (models.Model):
-    cash_register_id = models.ForeignKey(
-        'CashRegister', on_delete=models.CASCADE, null=False, blank=False)
     client_id = models.ForeignKey(
         'Client', on_delete=models.CASCADE, null=False, blank=False)
     bill_sub_total = models.FloatField()
@@ -139,7 +149,7 @@ class Bill (models.Model):
         'IVA', on_delete=models.CASCADE, null=False, blank=False, default=None)
     bill_date = models.DateField(auto_now_add=True)
     bill_time = models.TimeField(auto_now_add=True)
-    bill_sale = models.FloatField()
+    bill_earned_points = models.IntegerField()
     bill_delivery = models.BooleanField()
 
 
@@ -149,13 +159,19 @@ class BillDetails (models.Model):
     product_batch = models.ForeignKey(
         'Batch', on_delete=models.CASCADE, null=False, blank=False)
     product_quantity = models.IntegerField()
-    product_discount = models.FloatField(default=0)
 
 
 class CashRegister (models.Model):
-    store_id = models.ForeignKey(
-        'Store', on_delete=models.CASCADE, null=False, blank=False)
+    employee_id = models.ForeignKey(
+        'Employee', on_delete=models.CASCADE, null=False, blank=False)
     is_active = models.BooleanField()
+
+
+class CashRegisterBills(models.Model):
+    cash_register = models.ForeignKey(
+        'CashRegister', on_delete=models.CASCADE, null=False, blank=False)
+    bill = models.ForeignKey(
+        'Bill', on_delete=models.CASCADE, null=False, blank=False)
 
 
 class Payment(models.Model):
@@ -169,17 +185,12 @@ class Payment(models.Model):
 
 class PaymentMethod (models.Model):
     payment_method = models.CharField(max_length=20)
+    is_active = models.BooleanField
 
 
 class Currency (models.Model):
     currency_name = models.CharField(max_length=20)
-
-
-class CashRegisterIncome(models.Model):
-    cash_register_id = models.ForeignKey(
-        'CashRegister', on_delete=models.CASCADE, null=False, blank=False)
-    day_income_total = models.FloatField()
-    income_date = models.DateField(auto_now_add=True)
+    is_active = models.BooleanField
 
 
 class ExchangeRate (models.Model):
@@ -187,6 +198,7 @@ class ExchangeRate (models.Model):
         'Currency', on_delete=models.CASCADE, null=False, blank=False)
     exchange_rate = models.FloatField()
     date = models.DateField(auto_now_add=True)
+    is_active = models.BooleanField
 
 
 class Employee (models.Model):
@@ -198,18 +210,47 @@ class Employee (models.Model):
         max_length=1, choices=GENDER, blank=False, null=False)
     employee_birth_date = models.DateField()
     employee_phone = models.IntegerField()
-    employee_store = models.ForeignKey(
-        'Store', on_delete=models.CASCADE, null=False, blank=False)
     employee_job = models.ForeignKey(
         'Job', on_delete=models.CASCADE, null=False, blank=False)
     is_active = models.BooleanField()
+    salary_bonus = models.IntegerField()
+    employee_email = models.EmailField()
+
+
+def __str__(self):
+    return (self.employee_name + self.employee_last_name)
+
+
+class EmployeeStore(models.Model):
+    employee_store = models.ForeignKey(
+        'Store', on_delete=models.CASCADE, null=False, blank=False)
+    employee = models.ForeignKey(
+        'Employee', on_delete=models.CASCADE, null=False, blank=False)
+    hired_date = models.DateField(editable=False)
 
 
 class Job(models.Model):
     job_name = models.CharField(max_length=30)
     job_salary = models.FloatField
+    is_active = models.BooleanField()
 
 
 class IVA(models.Model):
     iva_porcentaje = models.FloatField()
     iva_date = models.DateField(auto_now_add=True)
+
+
+class Provider(models.Model):
+    provider_name = models.CharField(max_length=30)
+    provider_email = models.EmailField(unique=True)
+    provider_address = models.CharField(max_length=150)
+    is_active = models.BooleanField()
+
+    def __str__(self):
+        return self.provider_name
+
+
+class ProviderPhone(models.Model):
+    provider = models.ForeignKey(
+        'Provider', on_delete=models.CASCADE, null=False, blank=False)
+    provider_phone_number = models.IntegerField()
